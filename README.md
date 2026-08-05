@@ -1,30 +1,44 @@
-# Oleevia DocFlow — deploy-ready package
+# Oleevia DocFlow
 
-This is the fixed `dms-demo-fixed.jsx` app wrapped in a minimal Vite + React
-project so it can run as a real, standalone website (not just inside a
-Claude artifact).
+Vite + React deploy package for Oleevia DMS (document / purchase-request workflow).
 
-## What's inside
-- `src/App.jsx` — the fixed app (login-button bug and multi-approve-button
-  bug both resolved), with the full Oleevia logo intact.
-- `src/main.jsx` — app entry point. Includes a small shim that backs
-  `window.storage` with the browser's `localStorage`, since the app was
-  originally built against the Claude-artifact-only storage API. Data
-  (accounts, requests, audit trail) persists per-browser, same as the
-  original demo.
-- `index.html` — loads Tailwind via CDN (the app is styled entirely with
-  Tailwind utility classes).
-- `package.json`, `vite.config.js` — standard Vite + React build setup.
+## Live demo
 
-## Run locally
+- **Production:** https://oleevia-docflow.vercel.app
+- **GitHub:** https://github.com/gouthamnath-ai/OleeviaDMS
+
+## Finish deploying the full app
+
+The scaffold (Vite, `main.jsx`, `logo.js`, package files) is already on `main`.
+The full `src/App.jsx` (~200KB with the embedded logo) must be pushed from the
+`oleevia-deploy.zip` package:
+
+```bash
+unzip oleevia-deploy.zip
+cd oleevia-deploy
+git clone https://github.com/gouthamnath-ai/OleeviaDMS.git
+cp src/App.jsx OleeviaDMS/src/App.jsx
+cd OleeviaDMS
+git add src/App.jsx
+git commit -m "Add full Oleevia DocFlow App.jsx"
+git push origin main
+```
+
+If the Vercel project is linked to this GitHub repo, it will rebuild automatically.
+Otherwise redeploy with `vercel --prod` from the project folder.
+
+## Demo logins
+
+| Employee ID | Password    | Role      |
+|-------------|-------------|-----------|
+| OGC100      | Admin@123   | Admin     |
+| OGC111      | Welcome@123 | Requester |
+| OGC112      | Welcome@123 | Approver  |
+| OGC113      | Welcome@123 | Accounts  |
+
+## Local run
 
 ```bash
 npm install
 npm run dev
 ```
-
-Quick demo logins (employee ID / password):
-- OGC100 / Admin@123 — Admin
-- OGC111 / Welcome@123 — Requester (IT Department)
-- OGC112 / Welcome@123 — Approver
-- OGC113 / Welcome@123 — Accounts
