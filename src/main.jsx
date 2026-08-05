@@ -1,7 +1,17 @@
 import "./storage-shim.js";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import * as LucideReact from "lucide-react";
+import {
+  LayoutDashboard, FilePlus2, FolderOpen, LayoutTemplate, Search,
+  Check, X, Clock, IndianRupee, ChevronRight, Trash2, ArrowLeft, FileText, Mail, Send, LogOut, Lock, ShieldCheck,
+  Users, UserPlus, KeyRound, Power, Paperclip, History, ChevronDown, UserCircle, Settings, RefreshCw, Plane, ShoppingCart, MessageSquare
+} from "lucide-react";
+
+const LucideReact = {
+  LayoutDashboard, FilePlus2, FolderOpen, LayoutTemplate, Search,
+  Check, X, Clock, IndianRupee, ChevronRight, Trash2, ArrowLeft, FileText, Mail, Send, LogOut, Lock, ShieldCheck,
+  Users, UserPlus, KeyRound, Power, Paperclip, History, ChevronDown, UserCircle, Settings, RefreshCw, Plane, ShoppingCart, MessageSquare
+};
 
 const APP_URL =
   "https://cdn.jsdelivr.net/gh/gouthamnath-ai/OleeviaDMS@bf961c8b8aedffb20c2e11aaf839ea34208f1517/src/oleevia-deploy/oleevia-deploy/src/App.jsx";
@@ -24,10 +34,8 @@ async function loadFullApp() {
   await loadScript("https://unpkg.com/@babel/standalone@7.26.0/babel.min.js");
   const res = await fetch(APP_URL);
   if (!res.ok) throw new Error("Failed to fetch App.jsx: " + res.status);
-  let source = await res.text();
+  const source = await res.text();
 
-  // The fetched source imports from lucide-react and embeds the logo.
-  // Transform JSX + ESM imports to CommonJS so we can run it in-browser.
   const { code } = window.Babel.transform(source, {
     presets: [["react", { runtime: "classic" }]],
     plugins: [["transform-modules-commonjs", { strictMode: false }]],
