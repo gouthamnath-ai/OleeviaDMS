@@ -6,17 +6,28 @@
     <title>Oleevia DocFlow</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* Full logo on login / sidebar */
+      /* Default / sidebar logo — compact so it stays inside the sidebar */
       img[alt="Oleevia"] {
-        height: 6rem !important;
+        height: 2rem !important;
         width: auto !important;
-        max-width: 320px !important;
+        max-width: 140px !important;
         object-fit: contain !important;
         display: block !important;
       }
-      /* Extra top space so logo is not clipped */
-      body #root > div > div.w-full.max-w-sm {
-        padding-top: 1.5rem;
+      /* Login screen only — a bit larger, still fully visible */
+      .max-w-sm img[alt="Oleevia"] {
+        height: 3.5rem !important;
+        max-width: 220px !important;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      /* Keep sidebar content from overflowing into the main panel */
+      .w-56 {
+        overflow-x: hidden !important;
+      }
+      .w-56 img[alt="Oleevia"] {
+        height: 2rem !important;
+        max-width: 140px !important;
       }
     </style>
   </head>
@@ -24,7 +35,6 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script>
-      // Remove "DOCFLOW" and "Sign in with your employee ID" labels on the login screen
       (function () {
         function clean() {
           document.querySelectorAll("p").forEach(function (p) {
