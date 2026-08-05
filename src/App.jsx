@@ -367,7 +367,7 @@ function LoginScreen({ users, onLoginSuccess, onResetPassword }) {
     <div className="w-full h-screen bg-neutral-50 flex items-center justify-center overflow-y-auto py-8" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
       <div className="w-full max-w-sm px-4">
         <div className="flex items-center justify-center mb-1">
-          <img src={OLEEVIA_LOGO} alt="Oleevia" className="h-12 w-auto" />
+          <img src={OLEEVIA_LOGO} alt="Oleevia" className="h-16 w-auto max-w-[280px] object-contain" />
         </div>
         <p className="text-[11px] text-neutral-400 text-center mb-5 tracking-wide">DOCFLOW</p>
 
@@ -991,7 +991,7 @@ export default function DMSDemo() {
       {/* Sidebar */}
       <div className="w-56 shrink-0 bg-white border-r border-neutral-200 flex flex-col h-full">
         <div className="px-5 py-5 border-b border-neutral-200 shrink-0">
-          <img src={OLEEVIA_LOGO} alt="Oleevia" className="h-8 w-auto" />
+          <img src={OLEEVIA_LOGO} alt="Oleevia" className="h-10 w-auto max-w-[160px] object-contain" />
           <p className="text-[11px] text-neutral-400 mt-2">DocFlow · Demo, not connected to real data</p>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
