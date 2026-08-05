@@ -6,49 +6,14 @@
     <title>Oleevia DocFlow</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      /* Default / sidebar logo */
       img[alt="Oleevia"] {
-        height: 2rem !important;
-        width: auto !important;
-        max-width: 140px !important;
-        object-fit: contain !important;
-        display: block !important;
-      }
-      /* Login screen — smaller logo */
-      .max-w-sm img[alt="Oleevia"] {
-        height: 2.25rem !important;
-        max-width: 160px !important;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .w-56 {
-        overflow-x: hidden !important;
-      }
-      .w-56 img[alt="Oleevia"] {
-        height: 2rem !important;
-        max-width: 140px !important;
+        object-fit: contain;
+        display: block;
       }
     </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
-      (function () {
-        function clean() {
-          document.querySelectorAll("p").forEach(function (p) {
-            var t = (p.textContent || "").trim();
-            if (t === "DOCFLOW" || t === "Sign in with your employee ID") {
-              p.style.display = "none";
-            }
-          });
-        }
-        clean();
-        new MutationObserver(clean).observe(document.documentElement, {
-          childList: true,
-          subtree: true,
-        });
-      })();
-    </script>
   </body>
 </html>
