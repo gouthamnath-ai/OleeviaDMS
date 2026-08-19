@@ -1,44 +1,45 @@
-# Oleevia DocFlow
+# Oleevia DocFlow (DMS)
 
-Vite + React deploy package for Oleevia DMS (document / purchase-request workflow).
+Internal document workflow for purchase requests, renewals, TA/DA claims, and approvals.
 
-## Live demo
+## 9-stage procurement pipeline (Purchase & Renewal)
 
-- **Production:** https://oleevia-docflow.vercel.app
-- **GitHub:** https://github.com/gouthamnath-ai/OleeviaDMS
+1. **Quote Analysis** — compare vendor quotes
+2. **Collect Suggestion** — from the responsible person
+3. **Evaluation & Recommendation**
+4. **Proforma Invoice** — upload
+5. **Pre-Audit**
+6. **Audit**
+7. **Approval** — select vendor
+8. **Fund Processing** — accounts releases funds
+9. **Upload Final Invoice** → Completed
 
-## Finish deploying the full app
-
-The scaffold (Vite, `main.jsx`, `logo.js`, package files) is already on `main`.
-The full `src/App.jsx` (~200KB with the embedded logo) must be pushed from the
-`oleevia-deploy.zip` package:
-
-```bash
-unzip oleevia-deploy.zip
-cd oleevia-deploy
-git clone https://github.com/gouthamnath-ai/OleeviaDMS.git
-cp src/App.jsx OleeviaDMS/src/App.jsx
-cd OleeviaDMS
-git add src/App.jsx
-git commit -m "Add full Oleevia DocFlow App.jsx"
-git push origin main
-```
-
-If the Vercel project is linked to this GitHub repo, it will rebuild automatically.
-Otherwise redeploy with `vercel --prod` from the project folder.
+Other types (TA/DA, CEO): Pending → Approved → Paid.
 
 ## Demo logins
 
-| Employee ID | Password    | Role      |
-|-------------|-------------|-----------|
-| OGC100      | Admin@123   | Admin     |
-| OGC111      | Welcome@123 | Requester |
-| OGC112      | Welcome@123 | Approver  |
-| OGC113      | Welcome@123 | Accounts  |
+| Role | Employee ID | Password |
+|------|-------------|----------|
+| Admin | OGC100 | Admin@123 |
+| User | OGC111 | Welcome@123 |
+| Approver | OGC112 | Welcome@123 |
+| Accounts | OGC113 | Welcome@123 |
 
-## Local run
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
+
+## Deploy to Vercel (public link)
+
+1. Go to https://vercel.com/new
+2. Import this GitHub repo **or** drag-and-drop the project folder
+3. Framework: **Vite**
+4. Deploy and copy the URL
+
+## Notes
+
+- Demo data in browser localStorage
+- Passwords hashed client-side (SHA-256 + salt)
