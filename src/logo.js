@@ -1,6 +1,2 @@
-import p0 from "./logo_part_0.js";
-import p1 from "./logo_part_1.js";
-import p2 from "./logo_part_2.js";
-import p3 from "./logo_part_3.js";
-const OLEEVIA_LOGO = p0 + p1 + p2 + p3;
+const OLEEVIA_LOGO = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgNDAwIDEyMCI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIxMjAiIGZpbGw9IiMwZjc2NmUiIHJ4PSIxMiIvPgogIDx0ZXh0IHg9IjIwMCIgeT0iNzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSI3MDAiPk9MRUVWSUE8L3RleHQ+CiAgPHRleHQgeD0iMjAwIiB5PSI5OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzk5ZjZlNCIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0Ij5Eb2NGbG93PC90ZXh0Pgo8L3N2Zz4=";
 export default OLEEVIA_LOGO;
