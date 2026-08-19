@@ -1,30 +1,28 @@
-// Must load before App.jsx — ESM hoists imports, so this cannot live in main.jsx after the App import.
+// Client-side key/value store used by the demo build.
+// Backed by localStorage so data persists across refreshes in the same browser.
 if (typeof window !== "undefined" && !window.storage) {
-  const PREFIX = "oleevia_docflow:";
   window.storage = {
     async get(key) {
-      const raw = window.localStorage.getItem(PREFIX + key);
-      if (raw === null) return null;
-      return { key, value: raw, shared: false };
+      try {
+        const value = localStorage.getItem(key);
+        return value == null ? null : { value };
+      } catch (e) {
+        return null;
+      }
     },
     async set(key, value) {
-      window.localStorage.setItem(PREFIX + key, value);
-      return { key, value, shared: false };
+      try {
+        localStorage.setItem(key, typeof value === "string" ? value : String(value));
+      } catch (e) {
+        console.error("storage.set failed", e);
+      }
     },
     async delete(key) {
-      window.localStorage.removeItem(PREFIX + key);
-      return { key, deleted: true, shared: false };
-    },
-    async list(prefix) {
-      const keys = [];
-      for (let i = 0; i < window.localStorage.length; i++) {
-        const fullKey = window.localStorage.key(i);
-        if (fullKey && fullKey.startsWith(PREFIX)) {
-          const key = fullKey.slice(PREFIX.length);
-          if (!prefix || key.startsWith(prefix)) keys.push(key);
-        }
+      try {
+        localStorage.removeItem(key);
+      } catch (e) {
+        // ignore
       }
-      return { keys, prefix, shared: false };
     },
   };
 }
