@@ -1,0 +1,90 @@
+import React, { useState, useEffect } from "react";
+import {
+  LayoutDashboard, FilePlus2, FolderOpen, LayoutTemplate, Search,
+  Check, X, Clock, IndianRupee, ChevronRight, Trash2, ArrowLeft, FileText, Mail, Send, LogOut, Lock, ShieldCheck,
+  Users, UserPlus, KeyRound, Power, Paperclip, History, ChevronDown, UserCircle, Settings, RefreshCw, Plane, ShoppingCart, MessageSquare
+} from "lucide-react";
+import OLEEVIA_LOGO from "./logo.js";
+
+const DEPARTMENTS = ["IT Department", "Accounts", "Operations", "Administration", "Audit", "Complaints"];
+
+const DEPARTMENT_EMAILS = {
+  "IT Department": "it.head@company.com",
+  Accounts: "accounts.head@company.com",
+  Operations: "ops.head@company.com",
+  Administration: "admin.head@company.com",
+  Audit: "audit.head@company.com",
+  Complaints: "complaints.head@company.com",
+};
+const APPROVER_EMAIL = "approvals@company.com";
+const ACCOUNTS_EMAIL = "accounts@company.com";
+
+// --- FUTURE: Supabase (real backend) — not wired up yet --------------------
+// This build runs entirely on window.storage (local, per-browser demo
+// storage). Documents (requests, the audit trail, attachment files) are
+// written through `storage`; user accounts/passwords always go through
+// `localOnly`. Both are plain window.storage right now.
+//
+// To connect a real Supabase database later, WITHOUT touching any of the
+// call sites below (they already use `storage.get/set/delete`):
+//   1. npm install @supabase/supabase-js
+//   2. Create a Supabase project and run supabase-schema.sql in its SQL
+//      editor (creates a "dms_kv" table for documents).
+//   3. Replace the body of `storage` below with a version that reads/writes
+//      that table via createClient(url, anonKey), falling back to
+//      window.storage when Supabase isn't reachable. Leave `localOnly` as
+//      window.storage always — user accounts and password hashes should
+//      never be sent to Supabase.
+//   4. Keep the URL/key out of source control (env vars), and replace the
+//      demo "allow all" RLS policy with rules scoped to authenticated users
+//      before any real data goes through it.
+const storage = {
+  get: (key) => window.storage.get(key),
+  set: (key, value) => window.storage.set(key, value),
+  delete: (key) => window.storage.delete(key),
+};
+const localOnly = {
+  get: (key) => window.storage.get(key),
+  set: (key, value) => window.storage.set(key, value),
+  delete: (key) => window.storage.delete(key),
+};
+
+const CEO_EMAIL = "ceo@company.com";
+
+// The five kinds of request this system handles. "travel" is the TA & DA
+// Claim Form (post-travel reimbursement, matching the company's TRAVELLING
+// ALLOWANCE CLAIM FORM template) — journey-by-journey Date/Time/From/To/Mode/
+// Distance/Hotel/DA/Fare, netted against any advance already paid out.
+// "ta_advance" is the companion pre-travel request: money advanced BEFORE
+// the trip, which later gets deducted on the TA & DA Claim as "Advance".
+// "ceo" routes straight to the CEO instead of the usual approver — the exact
+// fields will be updated to match your company's CEO-approval template once
+// it's shared; for now it takes a subject, details, and an attachment.
+const REQUEST_TYPES = {
+  purchase: {
+    label: "Purchase request",
+    shortLabel: "Purchase",
+    icon: ShoppingCart,
+    desc: "Compare vendors and get approval before buying goods or services.",
+  },
+  renewal: {
+    label: "Renewal",
+    shortLabel: "Renewal",
+    icon: RefreshCw,
+    desc: "Renew an existing contract, subscription, or AMC with a vendor.",
+  },
+  ta_advance: {
+    label: "TA/DA advance request",
+    shortLabel: "TA/DA advance",
+    icon: Send,
+    desc: "Request money up front, before travelling, for an upcoming trip's TA & DA.",
+  },
+  travel: {
+    label: "TA & DA claim (post-travel)",
+    shortLabel: "TA/DA claim",
+    icon: Plane,
+    desc: "Claim travel allowance and daily allowance after a trip, matching the company's TA/DA claim form.",
+  },
+  ceo: {
+    label: "CEO approval",
+    shortLabel: "CEO appro
