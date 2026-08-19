@@ -1,5 +1,3 @@
-// Client-side key/value store used by the demo build.
-// Backed by localStorage so data persists across refreshes in the same browser.
 if (typeof window !== "undefined" && !window.storage) {
   window.storage = {
     async get(key) {
@@ -20,9 +18,7 @@ if (typeof window !== "undefined" && !window.storage) {
     async delete(key) {
       try {
         localStorage.removeItem(key);
-      } catch (e) {
-        // ignore
-      }
+      } catch (e) {}
     },
   };
 }

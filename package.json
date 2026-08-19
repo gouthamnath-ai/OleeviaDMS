@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/assemble.js && vite",
-    "build": "node scripts/assemble.js && vite build",
+    "dev": "node scripts/inflate.js && vite",
+    "build": "node scripts/inflate.js && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

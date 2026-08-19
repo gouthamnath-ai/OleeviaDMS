@@ -1,0 +1,11 @@
+import fs from "fs";
+import path from "path";
+import zlib from "zlib";
+import { fileURLToPath } from "url";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const a = fs.readFileSync(path.join(__dirname, "..", "src", "App.a.b64"), "utf8").trim();
+const b = fs.readFileSync(path.join(__dirname, "..", "src", "App.b.b64"), "utf8").trim();
+const buf = Buffer.from(a + b, "base64");
+const out = zlib.gunzipSync(buf);
+fs.writeFileSync(path.join(__dirname, "..", "src", "App.jsx"), out);
+console.log("Inflated App.jsx", out.length);

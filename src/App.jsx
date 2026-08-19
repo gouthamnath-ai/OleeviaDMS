@@ -1,1 +1,1 @@
-export { default } from "./oleevia-deploy/oleevia-deploy/src/App.jsx";
+export default function App(){return null}
